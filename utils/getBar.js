@@ -11,11 +11,10 @@ const sortStatesValidation = require('./sortStatesValidation.js');
 
 module.exports = async (
 	spinner,
-	countryName,
 	states,
 	{ bar, log, sortBy, limit, reverse }
 ) => {
-	if (!countryName && bar) {
+	if (bar) {
 		// Handle custom sorting and validate it.
 		const customSort = states
 			? sortStatesValidation(sortBy, spinner)

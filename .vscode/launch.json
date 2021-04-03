@@ -6,14 +6,19 @@
 			"type": "node",
 			"request": "launch",
 			"skipFiles": ["<node_internals>/**"],
-			"program": "${workspaceFolder}/index.js"
-			// "args": [
+			"program": "${workspaceFolder}/index.js",
+			"args": [
+				"vaccine",
+				"canada",
+				// "-r",
+				// "us",
+				"-m"
 			// 	"states",
 			// 	"--bar",
 			// 	"buildOutput/JavaScript1.js",
 			// 	"--sort",
 			// 	"per-million"
-			// ]
+			]
 		}
 	]
 }

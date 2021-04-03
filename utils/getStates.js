@@ -10,10 +10,9 @@ const sortStatesValidation = require('./sortStatesValidation.js');
 module.exports = async (
 	spinner,
 	output,
-	states,
 	{ sortBy, limit, reverse, json, bar }
 ) => {
-	if (states && !bar) {
+	if (!bar) {
 		sortStatesValidation(sortBy, spinner);
 		const [err, response] = await to(
 			axios.get(`https://corona.lmao.ninja/v2/states`)

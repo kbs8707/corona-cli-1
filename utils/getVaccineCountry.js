@@ -7,13 +7,8 @@ const handleError = require('cli-handle-error');
 module.exports = async (spinner, table, countryName, options) => {
     let url;
     //Return vaccine data for one country
-    if (countryName) {
-        url = `https://disease.sh/v3/covid-19/vaccine/coverage/countries/${countryName}?lastdays=10`;
-    }
-    //Return vaccine data for all countries
-    else {
-        url = `https://disease.sh/v3/covid-19/vaccine/coverage/countries?lastdays=10`;
-    }
+    url = `https://disease.sh/v3/covid-19/vaccine/coverage/countries/${countryName}?lastdays=10`;
+
     const [err, response] = await to(
         axios.get(url));
         exitCountry(err, spinner, countryName);
@@ -23,12 +18,17 @@ module.exports = async (spinner, table, countryName, options) => {
         
         // Format.
         const format = numberFormat(options.json);
-        
-        table.push([
-            `—`,
-            thisCountry.country,
-            format(thisCountry.timeline),
-        ]);
+
+        let singleData = [];
+        singleData.push('—');
+        singleData.push(thisCountry.country);
+        for (data in thisCountry.timeline) {
+            singleData.push(format(thisCountry.timeline[data]));
+        }
+        table.push(
+			singleData
+		);
+
         spinner.stopAndPersist();
         console.log(table.toString());
 };

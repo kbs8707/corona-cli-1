@@ -2,6 +2,18 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "Debug getCountries",
+			"type": "node",
+			"request": "launch",
+			"skipFiles": ["<node_internals>/**"],
+			"program": "${workspaceFolder}/index.js",
+			"args": [
+				"-m",
+				"-l",
+				"10"
+			]
+		},
+		{
 			"name": "Debug corona-cli",
 			"type": "node",
 			"request": "launch",
@@ -9,10 +21,10 @@
 			"program": "${workspaceFolder}/index.js",
 			"args": [
 				"vaccine",
-				"canada",
-				// "-r",
-				// "us",
-				"-m"
+				// "canada"
+				"-l",
+				"10"
+				// "-m"
 			// 	"states",
 			// 	"--bar",
 			// 	"buildOutput/JavaScript1.js",

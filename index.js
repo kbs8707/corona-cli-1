@@ -29,6 +29,9 @@ const {
 	borderless
 } = require('./utils/table.js');
 const getVaccineCountry = require('./utils/getVaccineCountry.js');
+const getVaccineCountries = require('./utils/getVaccineCountries.js');
+const getWorldwideVaccine = require('./utils/getWorldwideVaccine.js');
+const getVaccineDateRange = require('./utils/getVaccineDateRange.js');
 
 // Cli.
 const input = cli.input;
@@ -64,8 +67,20 @@ const options = { sortBy, limit, reverse, minimal, chart, log, json, bar };
 	if (input[0] === 'vaccine') {
 		//Identify if searching for one country or all countries
 		let country = input.length === 1 ? "" : input[1];
-		const output = new OutputFormat({ head, style, chars: border }) //TODO implement output format for vaccines
-		await getVaccineCountry(spinner, output, country, options)
+
+		//Date range has to be generated dynamically, therefore we cannot use the static header in table.js
+		let vaccine = await getVaccineDateRange();
+
+		const output = new OutputFormat({ head: vaccine, style, chars: border }) //TODO implement output format for vaccines
+		await getWorldwideVaccine(output, json);	//Get global vaccine coverage, also updates table header dates
+
+		if (input.length === 1) {
+			await getVaccineCountries(spinner, output, options)
+		}
+		else {
+			country = input[1];
+			await getVaccineCountry(spinner, output, country, options)
+		}
 	}
 
 	//States only supports bar graph

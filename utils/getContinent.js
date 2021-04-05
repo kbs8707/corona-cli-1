@@ -13,7 +13,6 @@ module.exports = async (
 	output,
 	{ sortBy, limit, reverse, json, bar }
 ) => {
-	if (!bar) {
 		sortContinentValidation(sortBy, spinner);
 		const [err, response] = await to(
 			axios.get(`https://corona.lmao.ninja/v3/covid-19/continents`)
@@ -53,5 +52,4 @@ module.exports = async (
 			spinner.info(`${cyan(`Sorted by:`)} ${sortBy}${isRev}`);
 		}
 		console.log(output.toString());
-	}
 };

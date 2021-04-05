@@ -13,7 +13,6 @@ const sortStatesValidation = require('./sortStatesValidation.js');
 module.exports = async (
 	spinner,
 	states,
-	continents,
 	{ bar, log, sortBy, limit, reverse }
 ) => {
 	if (bar) {
@@ -29,16 +28,7 @@ module.exports = async (
 	
 		const statesURL = `https://corona.lmao.ninja/v2/states`;
 		const countriesURL = `https://corona.lmao.ninja/v2/countries`;
-		const continentsURL = `https://corona.lmao.ninja/v3/covid-19/continents`;
-/*
-		if (states==true){
-			const [err, res] = await to(
-				//axios.get(states ? statesURL : countriesURL)
-				axios.get(statesURL)
-		);
-		}  */
 
-	
 		const [err, res] = await to(
 			axios.get(states ? statesURL : countriesURL)
 		);

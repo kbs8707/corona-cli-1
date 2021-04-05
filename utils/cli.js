@@ -10,6 +10,7 @@ module.exports = meow(
 	  ${cyan(`country-name`)}  Get data for a given country
 	  ${cyan(`states`)}        Get data for all USA states
 	  ${cyan(`continents`)}    Get data for all continents
+	  ${cyan(`vaccine`)}       Get vaccination data of the world or for a given country
 
 	Options
 	  ${yellow(`-s`)}, ${yellow(`--sort`)}      Sort data by type
@@ -24,8 +25,11 @@ module.exports = meow(
 
 	Examples
 	  ${green(`corona`)} ${cyan(`china`)}
+	  ${green(`corona`)} ${cyan(`"south africa"`)}
 	  ${green(`corona`)} ${cyan(`states`)}
 	  ${green(`corona`)} ${cyan(`continents`)}
+	  ${green(`corona`)} ${cyan(`vaccine`)}
+	  ${green(`corona`)} ${cyan(`vaccine`)} ${cyan(`canada`)}
 	  ${green(`corona`)} ${yellow(`--bar`)}
 	  ${green(`corona`)} ${cyan(`china`)} ${yellow(`--chart`)}
 	  ${green(`corona`)} ${cyan(`china`)} ${yellow(`--chart`)} ${yellow(`--log`)}

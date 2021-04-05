@@ -32,6 +32,10 @@ const getVaccineCountry = require('./utils/getVaccineCountry.js');
 
 // Cli.
 const input = cli.input;
+for (let i in input) {
+	input[i] = input[i].toLowerCase();
+}
+
 const xcolor = cli.flags.xcolor;
 const sortBy = cli.flags.sort;
 const reverse = cli.flags.reverse;
@@ -48,7 +52,6 @@ const options = { sortBy, limit, reverse, minimal, chart, log, json, bar };
 	await init(minimal || json);
 	const spinner = ora({ text: '' });
 	input[0] === 'help' && (await cli.showHelp(0));
-	const states = input[0] === 'states' ? true : false;
 	
 	// Table
 	const head = xcolor ? single : colored;

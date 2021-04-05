@@ -86,5 +86,45 @@ module.exports = {
 		deaths: 'deaths',
 		'deaths-today': 'todayDeaths',
 		active: 'active'
-	}
+	},
+
+	//ADDED
+	singleContinent: [
+		`#`,
+		`Country`,
+		`Cases`,
+		`Cases ${dim(`(today)`)}`,
+		`Deaths`,
+		`Deaths ${dim(`(today)`)}`,
+		`Recovered`,
+		`Active`,
+		`Critical`,
+		`Per Million`
+	],
+
+	coloredContinent: [
+		`#`,
+		`Country`,
+		`Cases`,
+		`Cases ${dim(`(today)`)}`,
+		`${red(`Deaths`)}`,
+		`${red(`Deaths (today)`)}`,
+		`${green(`Recovered`)}`,
+		`${yellow(`Active`)}`,
+		`${red(`Critical`)}`,
+		`Per Million`
+	],
+
+	//ADDED
+	sortingContinentKeys: {
+		continent: 'continent',
+		'cases': 'cases',
+		'cases-today': 'todayCases',
+		deaths: 'deaths',
+		'deaths-today': 'todayDeaths',
+		recovered: 'recovered',
+		active: 'active',
+		critical: 'critical',
+		'per-million': 'casesPerOneMillion'
+	},
 };

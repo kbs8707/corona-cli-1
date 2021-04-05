@@ -8,10 +8,12 @@ const { sortingKeys } = require('./table.js');
 const handleError = require('cli-handle-error');
 const sortValidation = require('./sortValidation.js');
 const sortStatesValidation = require('./sortStatesValidation.js');
+//const sortContinentsValidation = require('./sortContinentValidation.js');
 
 module.exports = async (
 	spinner,
 	states,
+	continents,
 	{ bar, log, sortBy, limit, reverse }
 ) => {
 	if (bar) {
@@ -24,12 +26,25 @@ module.exports = async (
 			logScale = x => (x === 0 ? undefined : Math.log(x));
 		}
 
+	
 		const statesURL = `https://corona.lmao.ninja/v2/states`;
 		const countriesURL = `https://corona.lmao.ninja/v2/countries`;
+		const continentsURL = `https://corona.lmao.ninja/v3/covid-19/continents`;
+/*
+		if (states==true){
+			const [err, res] = await to(
+				//axios.get(states ? statesURL : countriesURL)
+				axios.get(statesURL)
+		);
+		}  */
 
+	
 		const [err, res] = await to(
 			axios.get(states ? statesURL : countriesURL)
 		);
+	
+
+
 		handleError(`API is down, try again later.`, err, false);
 		let allRegions = res.data;
 

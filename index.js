@@ -20,10 +20,13 @@ const getCountryChart = require('./utils/getCountryChart.js');
 const getBar = require('./utils/getBar.js');
 const getWorldwide = require('./utils/getWorldwide.js');
 const getCountries = require('./utils/getCountries.js');
+const getContinents = require('./utils/getContinent.js');
 const {
 	style,
 	single,
 	colored,
+	singleContinent,
+	coloredContinent,
 	singleStates,
 	coloredStates,
 	borderless
@@ -55,16 +58,20 @@ const options = { sortBy, limit, reverse, minimal, chart, log, json, bar };
 	await init(minimal || json);
 	const spinner = ora({ text: '' });
 	input[0] === 'help' && (await cli.showHelp(0));
+
+	const states = input[0] === 'states' ? true : false;
+	const continents = input[0] === 'continents' ? true : false;
 	
 	// Table
 	const head = xcolor ? single : colored;
 	const headStates = xcolor ? singleStates : coloredStates;
+	const headContinent = xcolor ? singleContinent : coloredContinent;
 	const border = minimal ? borderless : {};
 	const OutputFormat = json ? JsonOutput : Table;
 	
 	// Display data.
 	spinner.start();
-	if (input[0] === 'vaccine') {
+	if (input[0]=== 'vaccine') {
 		//Identify if searching for one country or all countries
 		let country = input.length === 1 ? "" : input[1];
 
@@ -84,12 +91,22 @@ const options = { sortBy, limit, reverse, minimal, chart, log, json, bar };
 	}
 
 	//States only supports bar graph
-	else if (input[0] === 'states') {
+	else if (input[0]=== 'states') {
 		const states = true;
 		const output = new OutputFormat({ head: headStates, style, chars: border });
 		await getStates(spinner, output, options);
 		await getBar(spinner, states, options);
 	}
+
+	//Continents only supports bar graph
+	else if (input[0] === 'continents') {
+		const continents = true;
+		const output = new OutputFormat({ head: headContinent, style, chars: border });
+		await getContinents(spinner, output, options);
+	}
+
+
+
 	//Display country or world data
 	else {
 		const states = false;
@@ -105,7 +122,7 @@ const options = { sortBy, limit, reverse, minimal, chart, log, json, bar };
 		//World data only supports bar graph
 		else {
 			await getCountries(spinner, output, options);
-			await getBar(spinner, states, options);
+			await getBar(spinner, states, continents, options);
 		}
 	}
 	// theEnd(lastUpdated, states, minimal || json);

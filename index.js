@@ -105,8 +105,6 @@ const options = { sortBy, limit, reverse, minimal, chart, log, json, bar };
 		await getContinents(spinner, output, options);
 	}
 
-
-
 	//Display country or world data
 	else {
 		const states = false;
@@ -122,7 +120,7 @@ const options = { sortBy, limit, reverse, minimal, chart, log, json, bar };
 		//World data only supports bar graph
 		else {
 			await getCountries(spinner, output, options);
-			await getBar(spinner, states, continents, options);
+			await getBar(spinner, states, options);
 		}
 	}
 	// theEnd(lastUpdated, states, minimal || json);
